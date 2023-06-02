@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+    <style>
+        tr:nth-child(even) {
+  background-color: #dddddd;
+}
+    </style>
+</head>
+<body>
+    <h3 style="display: flex ;justify-content: center;" id="counter"></h3>
+
+    <table id="postsTable">
+<tr>
+    <th>Index</th>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Body</th>
+</tr>
+
+
+
+
+    </table>
+    
+</body>
+<script>
+    function getTable () {
+             axios.get("https://jsonplaceholder.typicode.com/posts")
+             .then (res => {
+                let data = res.data
+                let index = 0;
+
+                
+                
+                data.forEach(element => {
+                    let trElement = document.createElement("tr")
+                    let thElement1 = document.createElement("th")
+                    let thElement2 = document.createElement("th")
+                    let thElement3 = document.createElement("th")
+                    let thElement4 = document.createElement("th")
+
+                    thElement1.innerHTML=index+1;
+                    thElement2.innerHTML=element.id
+                    thElement3.innerHTML=element.title
+                    thElement4.innerHTML=element.body
+
+                    trElement.appendChild(thElement1)
+                    trElement.appendChild(thElement2)
+                    trElement.appendChild(thElement3)
+                    trElement.appendChild(thElement4)
+
+                    document.getElementById("postsTable").appendChild(trElement)
+                    index ++;
+
+                });
+                document.getElementById("counter").innerHTML="Number of elements : "+index
+             })
+
+    }
+    getTable()
+
+</script>
+</html>
